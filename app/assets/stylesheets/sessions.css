@@ -1,0 +1,6 @@
+.white {
+  font-family: 'Babylon Industrial';    
+  url('/assets/Babylon_Industrial.ttf') format('truetype');
+  font-size: 130%;
+  font-style: normal;
+}

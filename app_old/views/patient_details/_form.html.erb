@@ -1,0 +1,63 @@
+<%= form_for(@patient_detail) do |f| %>
+  <% if @patient_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@patient_detail.errors.count, "error") %> prohibited this patient_detail from being saved:</h2>
+
+      <ul>
+      <% @patient_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<hr>
+  <div class="col-xs-4 col-sm-4">
+    <%= f.label :file_no %><br>
+    <%= f.text_field :file_no, :autofocus => :true %>
+  </div>
+  <div class="col-xs-4 col-sm-4">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="col-xs-4 col-sm-4">
+    <%= f.label :age %><br>
+    <%= f.text_field :age %>
+  </div>
+  <div class="col-xs-4 col-sm-4">
+    <%= f.label :mobile %><br>
+    <%= f.text_field :mobile %>
+  </div>
+  <div class="col-xs-4 col-sm-4">
+    <%= f.label :nationality %><br>
+    <%= f.text_field :nationality, data: {autocomplete_source: '/nationality_name.json'} %>
+  </div>
+  <div class="col-xs-4 col-sm-4">
+    <%= f.label :payment_mode %><br>
+    <%= f.text_field :payment_mode, data: {autocomplete_source: '/payment_type.json'} %>
+  </div>
+  <div class="col-xs-4 col-sm-4">
+    <%= f.label :doctor %><br>
+    <%= f.text_field :doctor, data: {autocomplete_source: '/doctors_name.json'} %>
+  </div>
+  <div class="col-xs-4 col-sm-4" style="padding-top: 5px;">
+    <%= f.label :visit_date %><br>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="icon-calendar bigger-100"></i>
+        </span>
+    <%= f.text_field :visit_date, id: "start_date" %>
+      </div>
+  </div><br>
+  <div class="actions pull-left" style="padding-left:15px;padding-top: 23px;">
+    <%= f.submit class: "btn btn-purple" %>
+  </div>
+<% end %>
+<script>
+  
+  $( "#start_date" ).datetimepicker({
+    dateFormat: 'yy-mm-dd',
+    showOtherMonths: true,
+    selectOtherMonths: false
+    //isRTL:true,
+  });
+  </script>

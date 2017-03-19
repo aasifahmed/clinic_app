@@ -1,0 +1,84 @@
+<br/>
+	
+	<h3>Patient Report: <%= @start %> - <%= @end %></h3>
+
+<table class='table table-striped table-bordered'>
+  <tr>
+      <th>SI.No</th>
+      <th>Doctor</th>
+      <th>No of Patients</th>
+  </tr>
+	<% i = 0 %>
+<% @all_doctors.each do |doctor| %>
+  <tr>
+    <td><%= i += 1 %></td>
+    <td><%= doctor %></td>
+    <td><%= @patients_visited[doctor] %></td>
+    <!-- <td><%#= value %></td>  -->
+  </tr>
+<% end %>
+</table>
+<script type="text/javascript">
+$(function () {
+    var doctor_categories = []
+    var doctor_data = []
+    <%  @patients_visited.each do |k,v| %>
+        doctor_categories.push('<%= k %>');
+        doctor_data.push(<%= v %>);
+    <% end %>
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Patient visit chart'
+        },
+        xAxis: {
+            categories: doctor_categories
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total Patients visited'
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 5000,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '<br/>Total Patients: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                }
+            }
+        },
+        series: [{
+                name: 'sdf',
+                data: doctor_data
+        }
+        ]
+    });
+});
+        </script>
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>

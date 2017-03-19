@@ -1,0 +1,41 @@
+<style>
+.hiddendate {
+visibility:hidden;
+}
+</style>							
+
+		<form id="doctor_report_form" class="form-search" action="/form_submitted">
+
+			<div class="col-xs-3 col-sm-3">
+				<label for="id-date-range-picker-1">Doctor</label>
+				<div class="input-group">
+					<%=select_tag "doctor", options_for_select(PatientDetail.pluck(:doctor).uniq), :include_blank => false %>
+				</div>
+			</div>
+
+			
+			<div class="col-xs-3 col-sm-3">
+		<label for="id-date-range-picker-1">&nbsp;</label>
+				<br/>
+				<button id="doctor_report_btn" class="btn btn-info btn-sm" type="button">
+					<i class="icon-ok bigger-110"></i>
+					Submit
+				</button>
+			</div>
+			<input type="submit" style="display:none" />
+	</form>
+	
+  <div class="doctor_report" style="clear:both"></div>												
+<script>
+$( "#doctor_report_btn" ).click(function() {
+$( "#doctor_report_form" ).submit();
+});
+
+$( "form" ).submit(function( event ) {
+	$.get('/doctor_report?doctor='+$("#doctor").val(), function(data){
+		  $('.doctor_report').html(data);
+	});
+	event.preventDefault();
+});
+</script>
+

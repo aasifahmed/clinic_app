@@ -1,0 +1,24 @@
+
+<%= form_tag('/search_result') do %>
+  <div class="col-sm-3">File No</br><%= text_field_tag 'file_no' %></div>
+	<div class="col-sm-3">Patient Name</br><%= text_field_tag 'patient_name' %></div>
+	<div class="col-sm-3">Age</br><%= text_field_tag 'age' %></div>
+	<div class="col-sm-3">Sex</br><%= select_tag 'sex', "<option value = 1>Male</option><option value = 0>Female</option>".html_safe, include_blank: true %></div>
+	<div class="col-sm-3">Nationality</br><%=select_tag "nationality", options_for_select(@nation), :include_blank => true %></div>
+	<!-- <div class="col-sm-3">Nationality</br><%= text_field_tag 'nationality' %></div> -->
+	<!-- # <div class="col-sm-3">Type</br><%= text_field_tag 'visit_type' %></div> -->
+	# <div class="col-sm-3">Type</br><%=select_tag "visit_type", options_for_select(@visit), :include_blank => true %></div>
+	<div class="col-sm-3">Cash</br><%= text_field_tag 'cash' %></div>
+	<div class="col-sm-3">Doctor</br><%= select_tag 'doctor_id', options_from_collection_for_select(@doctor, "id", "name"), include_blank: true %></div>
+	<div class="col-sm-3">Time From</br><%= datetime_field_tag 'min_time' %></div>
+  <div class="col-sm-3">Time To</br><%= datetime_field_tag 'max_time' %></div>
+	<div style="clear:both"><br><%= submit_tag 'Search', class: 'btn btn-sm btn-pink' %></div>  </br>
+<% end %>
+
+
+<!-- <script>
+  $(document).ready(function(){
+    $('#max_time').datepicker({dateFormat: 'yy-mm-dd'});
+    $('#min_time').datepicker({dateFormat: 'yy-mm-dd'});
+  });
+</script> -->

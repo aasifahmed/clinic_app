@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>File no:</strong>
+  <%= @appointment.file_no %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @appointment.age %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @appointment.sex %>
+</p>
+
+<p>
+  <strong>Nationality:</strong>
+  <%= @appointment.nationality %>
+</p>
+
+<p>
+  <strong>Visit type:</strong>
+  <%= @appointment.visit_type %>
+</p>
+
+<p>
+  <strong>Cash:</strong>
+  <%= @appointment.cash %>
+</p>
+
+<p>
+  <strong>Insurance company:</strong>
+  <%= @appointment.insurance_company %>
+</p>
+
+<p>
+  <strong>Doctor:</strong>
+  <%= @appointment.doctor_id %>
+</p>
+
+<%= link_to 'Edit', edit_appointment_path(@appointment) %> |
+<%= link_to 'Back', appointments_path %>

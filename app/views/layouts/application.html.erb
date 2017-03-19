@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+#fontfashion {
+  font-family: 'Babylon Industrial';
+  url('/assets/Babylon_Industrial.ttf') format('truetype');
+  font-size: 130%;
+  font-style: normal;
+}
+</style>
+<head>
+	<title><%= "#{controller_name} - #{action_name}" %></title>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+<%= csrf_meta_tag %>
+
+	</head>
+
+	<body>
+		<div class="navbar navbar-default" id="navbar">
+
+			<div class="navbar-container" id="navbar-container">
+				<div class="navbar-header pull-left">
+					<a href="/" class="navbar-brand">
+						<small id="fontfashion">
+							<i class="icon-user"></i>
+							&nbsp;&nbsp;Accounting
+						</small>
+					</a><!-- /.brand -->
+				</div><!-- /.navbar-header -->
+
+				<div class="navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+
+
+						<li class="light-blue">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<img class="nav-user-photo" src="/assets/avatars/user.png" alt="Users's Photo" />
+								<span class="user-info">
+									<small>Hi! </small>
+								</span>
+
+								<i class="icon-caret-down"></i>
+							</a>
+
+							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+
+
+								<li class="divider"></li>
+
+								<li>
+									<a href="/logout">
+										<i class="icon-off"></i>
+										Logout
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul><!-- /.ace-nav -->
+				</div><!-- /.navbar-header -->
+			</div><!-- /.container -->
+		</div>
+
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<div class="sidebar menu-min" id="sidebar">
+					
+
+					<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+
+						<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+							<a href="/suppliers/new" class="btn btn-success" title='New Supplier'>
+								<i class="icon-user"></i>
+							</a>
+
+							<a href="/customers/new"  class="btn btn-info" title='New Customer'>
+								<i class="icon-group"></i>
+							</a>
+							<a href="/purchases/new" target="_blank" class="btn btn-warning" title='New Purchase'>
+							<span class="badge badge-transparent tooltip-danger" title="New&nbsp;Purchase" data-rel="tooltip" data-original-title="New Sale">
+								<i class="icon-briefcase"></i>
+								</span>
+							</a>
+
+							<a href="/sales/new" target="_blank" class="btn btn-danger">
+								<span class="badge badge-transparent tooltip-danger" title="New&nbsp;Sale" data-rel="tooltip" data-original-title="New Sale">
+										<i class="icon-gift"></i>
+								</span>
+
+							</a>
+						</div>
+
+						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+						<span class="btn btn-success"></span>
+
+							<span class="btn btn-info"></span>
+
+							<span class="btn btn-warning"></span>
+
+							<span class="btn btn-danger"></span>
+						</div>
+					</div><!-- #sidebar-shortcuts -->
+
+					<ul class="nav nav-list">
+						<li class="active">
+							<a href="/">
+								<i class="icon-dashboard"></i>
+								<span class="menu-text"> Dashboard </span>
+							</a>
+						</li>
+
+
+						<li>
+							<a href="/accounts" class="dropdown-toggle">
+								<i class="icon-list"></i>
+								<span class="menu-text"> Ledger list </span>
+
+								<b class="arrow icon-angle-down"></b>
+							</a>
+
+							<ul class="submenu">
+
+								<li>
+									<a href="/accounts">
+										<i class="icon-double-angle-right"></i>
+										Ledger list
+									</a>
+								</li>
+								<li>
+									<a href="/accounts/new">
+										<i class="icon-double-angle-right"></i>
+										New Ledger
+									</a>
+								</li>
+
+							</ul>
+						</li>
+
+						<li>
+							<a href="/transactions/new_receipt" class="dropdown-toggle">
+								<i class="icon-gift"></i>
+								<span class="menu-text"> New Receipt </span>
+
+								<b class="arrow icon-angle-down"></b>
+							</a>
+
+							<ul class="submenu">
+
+								<li>
+									<a href="/transactions/new_payment">
+										<i class="icon-double-angle-right"></i>
+										New Payment
+									</a>
+								</li>
+								<li>
+									<a href="/transactions/new_receipt">
+										<i class="icon-double-angle-right"></i>
+										New Receipt
+									</a>
+								</li>
+
+							</ul>
+						</li>
+
+						<li>
+							<a href="/profit_loss_statement" class="dropdown-toggle">
+								<i class="icon-gift"></i>
+								<span class="menu-text"> Report </span>
+
+								<b class="arrow icon-angle-down"></b>
+							</a>
+							<ul class="submenu">
+
+								<li>
+									<a href="/profit_loss_statement">
+										<i class="icon-double-angle-right"></i>
+										Profit & Loss Statement
+									</a>
+								</li>
+
+								<li>
+									<a href="/balance_sheet">
+										<i class="icon-double-angle-right"></i>
+										Balance Sheet
+									</a>
+								</li>
+
+							</ul>
+						</li>
+					</ul><!-- /.nav-list -->
+
+					<div class="sidebar-collapse" id="sidebar-collapse">
+						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+					</div>
+
+				</div>
+
+				<div class="main-content">
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+					  <ul class="breadcrumb">
+              
+
+
+
+            <div style="margin-top:10px;">
+              <ul class="nav nav-tabs" id="myTab">
+               
+                <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <i class="menu-icon fa fa-suitcase"></i> &nbsp;&nbsp;Ledger &nbsp;
+                    <i class="ace-icon fa icon-caret-down bigger-110 width-auto"></i>
+                  </a>
+
+                  <ul class="dropdown-menu dropdown-info">
+                    <li>
+                      <a href="/accounts/">Ledger list</a>
+                    </li>
+                    <li>
+                      <a href="/accounts/new">New Ledger</a>
+                    </li>
+                  </ul>
+                </li>
+
+
+                <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <i class="menu-icon fa fa-suitcase"></i> &nbsp;&nbsp;Entries &nbsp;
+                    <i class="ace-icon fa icon-caret-down bigger-110 width-auto"></i>
+                  </a>
+
+                  <ul class="dropdown-menu dropdown-info">
+                    <li>
+                      <a href="/transactions/new_receipt">Receipt</a>
+                    </li>
+                    <li>
+                      <a href="/transactions/new_payment">Payment</a>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <i class="menu-icon fa fa-suitcase"></i> &nbsp;&nbsp;Report &nbsp;
+                    <i class="ace-icon fa icon-caret-down bigger-110 width-auto"></i>
+                  </a>
+
+                  <ul class="dropdown-menu dropdown-info">
+                    <li>
+                      <a href="/profit_loss_statement">Profit & Loss </a>
+                    </li>
+                    <li>
+                      <a href="/balance_sheet">Balance Sheet </a>
+                    </li>
+                  </ul>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="nav-search" id="nav-search" style="padding-top:13px;">
+                <form action="#">
+                <span class="input-icon">
+                  <!-- <input type="text" name='term' placeholder="Search Anyting" class="nav-search-input search-customer-ref-no" id="nav-search-input" > -->
+                  <i class="ace-icon fa fa-search nav-search-icon"></i>
+                </span>
+                </form>
+            </div>
+
+
+            </ul><!-- .breadcrumb -->
+
+						<div class="nav-search" id="nav-search">
+							<button class="btn btn-info btn-xs" onclick="history.back()"><i class="icon-arrow-left align-top bigger-125"></i><b> Back</b></button>
+						</div><!-- #nav-search -->
+					</div>
+
+
+					<div class="page-content">
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<% unless ((params[:controller] == 'sales') && (params[:action] == 'new')) %>
+								<% flash.each do |key, value| %>
+									<div class="<%= flash_class(key) %>">
+											<button type=button" class="close" data-dismiss="alert">
+												<i class="icon-remove"></i>
+											</button>
+										  <%= value %>
+									</div>
+								<% end %>
+
+								<% end %>
+									<%= yield %>
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div>
+	</body>
+
+</html>

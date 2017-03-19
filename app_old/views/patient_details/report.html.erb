@@ -1,0 +1,72 @@
+
+<form id="patient_report_form" class="form-search" action="/form_submitted">
+
+				<%#= hidden_field_tag "report_type", 'CBP' %>
+		
+		<div class="col-xs-3 col-sm-3">
+			<label for="id-date-range-picker-1">Start Date</label>
+			<div class="input-group">
+				<span class="input-group-addon">
+					<i class="icon-calendar bigger-110"></i>
+				</span>
+				<input id='start_date' class="form-control date-picker" id="start_date" type="text" data-date-format="dd-mm-yyyy" />
+			</div>
+		</div>
+	
+		<div class="col-xs-3 col-sm-3">
+	<label for="id-date-range-picker-1">End Date</label>
+			<div class="input-group">
+				<input id='end_date' class="form-control date-picker" id="end_date" type="text" data-date-format="dd-mm-yyyy" />
+				<span class="input-group-addon">
+					<i class="icon-calendar bigger-110"></i>
+				</span>
+			</div>
+		</div>
+
+		<div class="col-xs-3 col-sm-3">
+				<label for="id-date-range-picker-1">Doctor</label>
+				<div class="input-group">
+					<%=select_tag "doctor", options_for_select(PatientDetail.pluck(:doctor).uniq), :include_blank => false %>
+				</div>
+			</div>
+		
+		<div class="col-xs-3 col-sm-3">
+	<label for="id-date-range-picker-1">&nbsp;</label>
+			<br/>
+			<button id="patient_report_btn" class="btn btn-pink btn-sm report" type="button">
+				<i class="icon-ok bigger-110"></i>
+				Submit
+			</button>
+		</div>
+		<input type="submit" style="display:none" />
+</form>
+
+<div class="patient_report" style="clear:both"></div>
+<script>
+$( "#patient_report_btn" ).click(function() {
+$( "#patient_report_form" ).submit();
+});
+
+$( "form" ).submit(function( event ) {
+$('.patient_report').html('<br/><br/><center><img src="/assets/loader.gif"></center>');
+$.get('/patient_report?start='+$("#start_date" ).val()+'&end='+$("#end_date" ).val()+'&doctor='+$("#doctor").val(), function(data){
+$('.patient_report').empty().append(data);
+});
+event.preventDefault();
+});
+</script>
+<script>
+  
+  $( "#start_date" ).datepicker({
+    dateFormat: 'yy-mm-dd',
+    showOtherMonths: true,
+    selectOtherMonths: false
+    //isRTL:true,
+  });
+  $( "#end_date" ).datepicker({
+    dateFormat: 'yy-mm-dd',
+    showOtherMonths: true,
+    selectOtherMonths: false
+    //isRTL:true,
+  });
+  </script>

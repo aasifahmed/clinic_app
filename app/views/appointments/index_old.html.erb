@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Total No of Counts : <%= @result %></h1>
+
+<table class="table-striped table">
+  <thead>
+    <tr>
+      <th>File no</th>
+      <th>Age</th>
+      <th>Sex</th>
+      <th>Nationality</th>
+      <th>Visit type</th>
+      <th>Cash</th>
+      <th>Insurance company</th>
+      <th>Doctor</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @appointments.each do |appointment| %>
+      <tr>
+        <td><%= appointment.file_no %></td>
+        <td><%= appointment.age %></td>
+        <!-- <td><%#= appointment.sex ? 'Male' : 'Female' %></td> -->
+        <td><%= @sex[appointment.sex] %></td>
+        <td><%= appointment.nationality %></td>
+        <td><%= appointment.visit_type %></td>
+        <td><%= appointment.cash %></td>
+        <td><%= appointment.insurance_company.name if appointment.insurance_company %></td>
+        <td><%= appointment.doctor.name %></td>
+        <td><%= link_to 'Show', appointment %></td>
+        <td><%= link_to 'Edit', edit_appointment_path(appointment) %></td>
+        <td><%= link_to 'Destroy', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<table>
+  <tr>
+    <th>Male</th>
+    <th>Female</th>
+  </tr>
+  <tr>
+    <td><%= @sex.length %></td>
+    <td></td>
+  </tr>
+</table>
+<%= link_to 'New Appointment', new_appointment_path %>

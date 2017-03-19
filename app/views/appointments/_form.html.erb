@@ -1,0 +1,68 @@
+<%= form_for(appointment) do |f| %>
+  <% if appointment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
+
+      <ul>
+      <% appointment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :patient_name %>
+    <%= f.text_field :patient_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :file_no %>
+    <%= f.text_field :file_no %>
+  </div>
+
+  <div class="field">
+    <%= f.label :age %>
+    <%= f.number_field :age %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sex %>
+    <%= f.check_box :sex %>
+  </div>
+
+  <div class="field">
+    <%= f.label :nationality %>
+    <%= f.text_field :nationality %>
+  </div>
+
+  <div class="field">
+    <%= f.label :visit_type %>
+    <%= f.text_field :visit_type %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cash %>
+    <%= f.text_field :cash %>
+  </div>
+
+  <div class="field">
+    <%= f.label :appointment_time %>
+    <%= f.datetime :appointment_time %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :insurance_company_id %>
+    <%= f.text_field :insurance_company_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :doctor_id %>
+    <%= f.text_field :doctor_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

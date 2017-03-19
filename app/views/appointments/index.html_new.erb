@@ -1,0 +1,145 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Total No of Counts : <%= @result %></h1>
+
+<!-- <table class="table-striped table">
+  <thead>
+    <tr>
+      <th>File no</th>
+      <th>Age</th>
+      <th>Sex</th>
+      <th>Nationality</th>
+      <th>Visit type</th>
+      <th>Cash</th>
+      <th>Insurance company</th>
+      <th>Doctor</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @appointments.each do |appointment| %>
+      <tr>
+        <td><%= appointment.file_no %></td>
+        <td><%= appointment.age %></td>
+        <td><%#= appointment.sex ? 'Male' : 'Female' %></td>
+        <td><%= @sex[appointment.sex] %></td>
+        <td><%= appointment.nationality %></td>
+        <td><%= appointment.visit_type %></td>
+        <td><%= appointment.cash %></td>
+        <td><%= appointment.insurance_company.name if appointment.insurance_company %></td>
+        <td><%= appointment.doctor.name %></td>
+        <td><%= link_to 'Show', appointment %></td>
+        <td><%= link_to 'Edit', edit_appointment_path(appointment) %></td>
+        <td><%= link_to 'Destroy', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table> -->
+
+<br>
+<table class="table table-striped table-bordered">
+<h4> Gender Based:</h4>
+  <tr>
+    <th>Male</th>
+    <th>Female</th>
+  </tr>
+   <%# @appointments.each do |appointment| %>
+  <tr>
+    <td><%= @male_count.length %></td>
+    <td><%= @female_count.length %></td>
+  </tr>
+  <%# end %>
+</table>
+
+<table class="table table-striped table-bordered">
+<h4> Cash and Insurance:</h4>
+  <tr>
+    <th>Cash</th>
+    <th>Insurance</th>
+  </tr>
+  <tr>
+    <td><%= @cash.length %></td>
+    <td><%= @insurance.length %></td>
+  </tr>
+</table>
+<table class="table table-striped table-bordered">
+<h4> Visit Type:</h4>
+  <tr>
+    <th>New</th>
+    <th>Old</th>
+    <th>Revisit</th>
+  </tr>
+  <tr>
+    <td><%= @new_visit_count.length %></td>
+    <td><%= @old_visit_count.length %></td>
+    <td><%= @revisit_count.length %></td>
+  </tr>
+</table>
+
+
+<table class="table table-striped table-bordered">
+<h4> Nationality:</h4>
+  <tr>
+    <th>Indian</th>
+    <th>Other</th>
+  </tr>
+   <%# @appointments.each do |appointment| %>
+  <tr>
+    <td><%= @national.length %></td>
+    <td><%= @other_national.length %></td>
+  </tr>
+  <%# end %>
+</table>
+
+<table class="table table-striped table-bordered">
+<h4> Age Group:</h4>
+  <tr>
+    <th>0-10</th>
+    <th>11-20</th>
+    <th>21-30</th>
+    <th>31-40</th>
+    <th>41-50</th>
+    <th>51-60</th>
+    <th>61-70</th>
+    <th>71 above</th>
+  </tr>
+   <%# @appointments.each do |appointment| %>
+  <tr>
+    <td><%= @toddlers.length %></td>
+    <td><%= @teen.length %></td>
+    <td><%= @youth.length %></td>
+    <td><%= @adult.length %></td>
+    <td><%= @middle.length %></td>
+    <td><%= @mature.length %></td>
+    <td><%= @old.length %></td>
+    <td><%= @grand.length %></td>
+  </tr>
+  <%# end %>
+</table>
+
+<table class="table table-striped table-bordered">
+<h4> Age Group:</h4>
+  <tr>
+    <th>Sunday</th>
+    <th>Monday</th>
+    <th>Tuesday</th>
+    <th>Wednesday</th>
+    <th>Thursday</th>
+    <th>Friday</th>
+    <th>Saturday</th>
+  </tr>
+   <%# @appointments.each do |appointment| %>
+  <tr>
+    <td><%= @sun.length %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <%# end %>
+</table>
+
+<%= link_to 'New Appointment', new_appointment_path %>

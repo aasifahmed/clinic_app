@@ -1,0 +1,279 @@
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Total No of Counts : <%= @result %></h1>
+
+
+<br>
+<div class="row">
+  <div class="col-sm-6">
+  <table class="table table-striped table-bordered">
+  <h4> Gender Based:</h4>
+    <tr>
+      <th>Male</th>
+      <th>Female</th>
+    </tr>
+     <%# @appointments.each do |appointment| %>
+    <tr>
+      <td><%= @male_count %></td>
+      <td><%= @female_count %></td>
+    </tr>
+    <%# end %>
+  </table>
+  </div>
+  <div class="col-sm-6">
+    <div id="sex-container" style="min-width: 310px; height: 300px; max-width: 400px; margin: 0 auto"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+  <table class="table table-striped table-bordered">
+  <h4> Cash and Insurance:</h4>
+    <tr>
+      <th>Cash</th>
+      <th>Insurance</th>
+    </tr>
+    <tr>
+      <td><%= @cash %></td>
+      <td><%= @insurance %></td>
+    </tr>
+  </table>
+  </div>
+  <div class="col-sm-6">
+    <div id="cash-container" style="min-width: 310px; height: 300px; max-width: 400px; margin: 0 auto"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <table class="table table-striped table-bordered">
+    <h4> Visit Type:</h4>
+      <tr>
+        <th>New</th>
+        <th>Old</th>
+        <th>Revisit</th>
+      </tr>
+      <tr>
+        <td><%= @new_visit_count %></td>
+        <td><%= @old_visit_count %></td>
+        <td><%= @revisit_count %></td>
+      </tr>
+    </table>
+
+  </div>
+  <div class="col-sm-6">
+    <div id="visit-container" style="min-width: 310px; height: 300px; max-width: 400px; margin: 0 auto"></div>
+  </div>
+</div>
+<div class="row">
+<div class="col-sm-6">
+
+<table class="table table-striped table-bordered">
+<h4> Nationality:</h4>
+  <tr>
+    <th>Indian</th>
+    <th>Other</th>
+  </tr>
+   <%# @appointments.each do |appointment| %>
+  <tr>
+    <td><%= @national.length %></td>
+    <td><%= @other_national.length %></td>
+  </tr>
+  <%# end %>
+</table>
+
+</div>
+</div>
+<table class="table table-striped table-bordered">
+<h4> Age Group:</h4>
+  <tr>
+    <th>0-10</th>
+    <th>11-20</th>
+    <th>21-30</th>
+    <th>31-40</th>
+    <th>41-50</th>
+    <th>51-60</th>
+    <th>61-70</th>
+    <th>71 above</th>
+  </tr>
+   <%# @appointments.each do |appointment| %>
+  <tr>
+    <td><%= @toddlers.length %></td>
+    <td><%= @teen.length %></td>
+    <td><%= @youth.length %></td>
+    <td><%= @adult.length %></td>
+    <td><%= @middle.length %></td>
+    <td><%= @mature.length %></td>
+    <td><%= @old.length %></td>
+    <td><%= @grand.length %></td>
+  </tr>
+  <%# end %>
+</table>
+
+
+<table class="table table-striped table-bordered">
+<h4> Days of Week:</h4>
+<% @days.collect{|p| [Date::DAYNAMES[p.DOW], p.CNT]}.transpose.each do |line| %>
+  <tr>
+    <% line.each do |cell| %>
+      <td><%= cell %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+
+<table class="table table-striped table-bordered">
+<h4> Time of Day:</h4>
+<% @hours.collect{|p| ["#{p.HR} - #{p.HR + 1}", p.CNT]}.transpose.each do |line| %>
+  <tr>
+    <% line.each do |cell| %>
+      <td><%= cell %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+
+<table class="table table-striped table-bordered">
+<h4>Shift Rotation:</h4>
+  <tr>
+      <td>9-3</td>
+      <td>4-11</td>
+  </tr>
+  <tr>
+    <td><%= @shift1.length %></td>
+    <td><%= @shift2.length %></td>
+  </tr>
+  </table>  
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+<script>
+  $(document).ready(function () {
+
+    // Build the chart
+    Highcharts.chart('sex-container', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Gender Wise Patients'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'Male',
+                y: <%= @male_count %>
+            }, {
+                name: 'Female',
+                color: 'pink',
+                y: <%= @female_count %>,
+                sliced: true,
+                selected: true
+            }]
+        }]
+    });
+    // Build the chart
+    Highcharts.chart('cash-container', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Cash and Insurance'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'Cash',
+                color: 'red',
+                y: <%= @cash %>
+            }, {
+                name: 'Insurance',
+                y: <%= @insurance %>,
+                sliced: true,
+                selected: true
+            }]
+        }]
+    });
+});
+    // Build the chart
+    Highcharts.chart('visit-container', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Visit Type'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Visits',
+            colorByPoint: true,
+            data: [{
+                name: 'New Visit',
+                color: '#f7a35c',
+                y: <%= @new_visit_count %>
+            }, {
+                name: 'Old Visit',
+                y: <%= @old_visit_count %>
+            }, {
+                name: 'Revisit',
+                y: <%= @revisit_count %>,
+                sliced: true,
+                selected: true
+            }]
+        }]
+});
+</script>

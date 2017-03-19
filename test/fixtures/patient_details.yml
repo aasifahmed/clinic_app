@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  file_no: MyString
+  name: MyString
+  age: MyString
+  mobile: MyString
+  nationality: MyString
+  payment_mode: MyString
+  doctor: MyString
+  visit_date: 2016-10-30 09:52:30
+
+two:
+  file_no: MyString
+  name: MyString
+  age: MyString
+  mobile: MyString
+  nationality: MyString
+  payment_mode: MyString
+  doctor: MyString
+  visit_date: 2016-10-30 09:52:30
