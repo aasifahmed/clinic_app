@@ -66,24 +66,35 @@
   </div>
 </div>
 <div class="row">
-<div class="col-sm-6">
+<div class="col-sm-12">
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered" style="overflow-x: scroll;display: block;">
 <h4> Nationality:</h4>
-  <tr>
+ <!--  <tr>
     <th>Indian</th>
     <th>Other</th>
-  </tr>
-   <%# @appointments.each do |appointment| %>
+  </tr> -->
+   <tr>
+   <% @all_national.each do |nation| %>
+     <th><%= nation %></th>
+     <% end %>
+   </tr>
   <tr>
-    <td><%= @national.length %></td>
-    <td><%= @other_national.length %></td>
+   <% @all_national.each do |nation| %>
+    <td><%= @all_national_visits[nation] %></td>
+  <% end %>
   </tr>
-  <%# end %>
 </table>
 
 </div>
 </div>
+<div class="row">
+<div class="col-sm-12">
+<div id="nationals" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-6">
 <table class="table table-striped table-bordered">
 <h4> Age Group:</h4>
   <tr>
@@ -109,7 +120,11 @@
   </tr>
   <%# end %>
 </table>
-
+</div>
+<div class="col-sm-6">
+<div id="age-container" style="min-width: 310px; height: 300px; max-width: 400px; margin: 0 auto"></div>
+</div>
+</div>
 
 <table class="table table-striped table-bordered">
 <h4> Days of Week:</h4>
@@ -133,8 +148,8 @@
   </tr>
 <% end %>
 </table>
-
-
+<div class="row">
+<div class="col-sm-6">
 <table class="table table-striped table-bordered">
 <h4>Shift Rotation:</h4>
   <tr>
@@ -146,14 +161,23 @@
     <td><%= @shift2.length %></td>
   </tr>
   </table>  
-
-
+</div>
+<div class="col-sm-6">
+<div id="rotation-container" style="min-width: 310px; height: 300px; max-width: 400px; margin: 0 auto"></div>
+</div>
+</div>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 
 <script>
   $(document).ready(function () {
+    var national_types = []
+    var national_data = []
+    <%  @all_national_visits.each do |k,v| %>
+        national_types.push('<%= k %>');
+        national_data.push(<%= v %>);
+    <% end %>
 
     // Build the chart
     Highcharts.chart('sex-container', {
@@ -233,7 +257,6 @@
             }]
         }]
     });
-});
     // Build the chart
     Highcharts.chart('visit-container', {
         chart: {
@@ -276,4 +299,156 @@
             }]
         }]
 });
+    // Build the chart
+    Highcharts.chart('rotation-container', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Shift based Patients visit'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Rotation',
+            colorByPoint: true,
+            data: [{
+                name: '9-3',
+                y: <%= @shift1.length %>
+            }, {
+                name: '4-11',
+                color: 'pink',
+                y: <%= @shift2.length %>,
+                sliced: true,
+                selected: true
+            }]
+        }]
+    });
+
+    // Build the chart
+    Highcharts.chart('age-container', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'column'
+        },
+        title: {
+            text: 'Age based Patients visit'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            column: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Age',
+            colorByPoint: true,
+            data: [{
+                name: '0-10',
+                y: <%= @toddlers.length %>
+            }, {
+                name: '11-20',
+                y: <%= @teen.length %>
+            }, {
+                name: '21-30',
+                y: <%= @youth.length %>
+            }, {
+                name: '31-40',
+                y: <%= @adult.length %>
+            }, {
+                name: '41-50',
+                y: <%= @middle.length %>
+            }, {
+                name: '51-60',
+                y: <%= @mature.length %>
+            }, {
+                name: '61-70',
+                y: <%= @old.length %>
+            }, {
+                name: '71 above',
+                color: 'pink',
+                y: <%= @grand.length %>,
+                sliced: true,
+                selected: true
+            }]
+        }]
+    });
+
+    Highcharts.chart('nationals', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'National based visit chart'
+        },
+        xAxis: {
+            categories: national_types
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total Patients visited'
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 5000,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '<br/>Total Patients: {point.stackTotal}'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: false,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                }
+            }
+        },
+        series: [{
+                name: 'sdf',
+                data: national_data
+        }
+        ]
+    });
+  });
 </script>

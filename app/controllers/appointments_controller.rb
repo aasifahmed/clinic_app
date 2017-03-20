@@ -19,6 +19,8 @@ class AppointmentsController < ApplicationController
   def search_result
     @sex = {false => 'Female', true => 'Male'}
     @sex = {false => 'Female', true => 'Male'}
+    @all_national = Array.new
+    @all_national_visits = Hash.new
     @appointments = Appointment.where(nil) # creates an anonymous scope
     @appointments = @appointments.file_no(params[:file_no]) if params[:file_no].present?
     @appointments = @appointments.age(params[:age]) if params[:age].present?
@@ -37,6 +39,10 @@ class AppointmentsController < ApplicationController
     @cash = @appointments.where(insurance_company_id: nil).length
     @insurance = @appointments.where.not(insurance_company_id: nil).length
     @national = @appointments.where(nationality: 'INDIAN')
+    @all_national = @appointments.pluck(:nationality).uniq
+    @all_national.each do |nationals|
+      @all_national_visits[nationals] = @appointments.where(:nationality => nationals).length
+    end
     @other_national = @appointments.where('nationality !=  ?', "INDIAN")
     @toddlers = @appointments.where('age <= ?', 10)
     @teen = @appointments.where('age > ? AND age <= ?', 10, 20)
